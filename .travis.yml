@@ -7,3 +7,24 @@ before_install:
 
 script:
   - docker run -e CI=true devimage npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-2"
+  app: "dkr"
+  env: "Dkr-env"
+  bucket_name: "elasticbeanstalk-us-east-2-492868958302"
+  bucket_path: "dkr"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+
+
+    #    The code will now look like this:
+
+    #  access_key_id: $AWS_ACCESS_KEY
+    #  secret_access_key: $AWS_SECRET_KEY
+    # AKIAXFQKHPBPGGPFVCO2
+    # oSjqzarZlHeW55Yllq7Av11DRysYYgAfsLm1atQz
